@@ -31,7 +31,14 @@ var app = express();
 
 
 /** 8) Chaining middleware. A Time server */
-
+app.get('/now', (req, res, next) => {
+    console.log('inside first middleware function...');
+    req.time = new Date().toString();
+    next();
+}, (req, res) => {
+    console.log('inside second middleware function...');
+    res.json( {time: req.time} );
+});
 
 /** 9)  Get input from client - Route parameters */
 
